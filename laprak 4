@@ -1,0 +1,88 @@
+# ==========================================
+# WATERMARK: Kelompok 38
+# Program: Sistem Penilaian Mahasiswa
+# ==========================================
+
+# 1. FUNCTION: NON-RETURN TYPE (Tanpa Parameter)
+def tampilkan_watermark():
+    print("="*45)
+    print(" SELAMAT DATANG DI SISTEM PENILAIAN MAHASISWA TEKNIK KOMPUTER UNDIP 2026 ")
+    print(" PROGRAM BUATAN KELOMPOK 38 ")
+    print("="*45)
+
+# 2. FUNCTION: RETURN TYPE (Berparameter)
+# Syarat Silang terpenuhi: Function ini mengembalikan nilai (return)
+def hitung_rata_rata(kumpulan_nilai):
+    total = 0
+    # Menggunakan Perulangan (For Loop)
+    for n in kumpulan_nilai:
+        total += n
+    
+    # Mengembalikan nilai (Return)
+    if len(kumpulan_nilai) > 0:
+        return total / len(kumpulan_nilai)
+    else:
+        return 0
+
+# PEMBUATAN CLASS UNTUK MENDEFINISIKAN METHOD
+class Mahasiswa:
+    def __init__(self, nama):
+        self.nama = nama
+        self.nilai_akhir = 0
+
+    # 3. METHOD: RETURN TYPE (Tanpa parameter yang dinamis dari luar class)
+    def tentukan_grade(self):
+        # Menggunakan Pengkondisian (If-Elif-Else)
+        if self.nilai_akhir >= 80:
+            return "A (Sangat Baik)"
+        elif self.nilai_akhir >= 70:
+            return "B (Baik)"
+        elif self.nilai_akhir >= 60:
+            return "C (Cukup)"
+        else:
+            return "D (Tidak Lulus)"
+
+    # 4. METHOD: NON-RETURN TYPE (Berparameter)
+    # Syarat Silang terpenuhi: Karena Function hitung_rata_rata menggunakan Return, 
+    # Method ini dibuat Non-Return (hanya melakukan aksi/void).
+    def set_nilai_akhir(self, nilai):
+        self.nilai_akhir = nilai
+        # Tidak ada return, hanya menyimpan data
+
+    # Method Non-Return tambahan untuk output
+    def tampilkan_rapor(self):
+        grade = self.tentukan_grade()
+        print("\n--- HASIL RAPOR MAHASISWA ---")
+        print(f"Nama Mahasiswa : {self.nama}")
+        print(f"Nilai Rata-rata: {self.nilai_akhir:.2f}")
+        print(f"Status/Grade   : {grade}")
+        print("-----------------------------")
+
+
+# ==========================================
+# PROGRAM UTAMA (MAIN)
+# ==========================================
+tampilkan_watermark()
+
+# Input data
+nama_mhs = input("Masukkan nama mahasiswa: ")
+mhs = Mahasiswa(nama_mhs)
+
+list_nilai_tugas = []
+jumlah_tugas = int(input("Berapa banyak tugas yang ingin dinilai? (misal: 3): "))
+
+# Perulangan (While Loop) untuk input data secara dinamis
+i = 0
+while i < jumlah_tugas:
+    nilai = float(input(f"Masukkan nilai tugas ke-{i+1}: "))
+    list_nilai_tugas.append(nilai)
+    i += 1
+
+# Memanggil Function yang memiliki Return Type
+rata_rata_kelas = hitung_rata_rata(list_nilai_tugas)
+
+# Memanggil Method yang memiliki Non-Return Type (Void)
+mhs.set_nilai_akhir(rata_rata_kelas)
+
+# Menampilkan hasil akhir
+mhs.tampilkan_rapor()
